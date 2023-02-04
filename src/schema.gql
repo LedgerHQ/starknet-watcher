@@ -1,0 +1,22 @@
+type Account {
+  id: String!
+  signers: Signer
+}
+
+type Signer {
+  id: String!
+}
+
+type ChallengePeriod {
+  id: String!
+  account: Account!
+  issuer: String!
+  reason: String!
+  deadline: String!
+  isClosed: String!
+}
+
+type Health {
+  id: String!
+  synced_block: String!
+}

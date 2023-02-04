@@ -1,10 +1,43 @@
-import dotenv from 'dotenv';
+import 'dotenv/config';
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import fs from 'fs';
+import Checkpoint, { LogLevel } from '@snapshot-labs/checkpoint';
+import config from './config.json';
+import * as writers from './writers';
+import BridgeAbi from './abis/bridge.json';
 
-dotenv.config();
-console.log(process.env.PORT);
+const dir = __dirname.endsWith('dist/src') ? '../' : '';
+const schemaFile = path.join(__dirname, `${dir}../src/schema.gql`);
+const schema = fs.readFileSync(schemaFile, 'utf8');
 
-const sum = (x: number, y: number) => {
-  return x + y;
+const checkpointOptions = {
+  logLevel: LogLevel.Info,
+  // prettifyLogs: process.env.NODE_ENV !== 'production',
+  abis: {
+    Bridge: BridgeAbi,
+  },
 };
 
-export default sum;
+// Initialize checkpoint
+// @ts-ignore
+const checkpoint = new Checkpoint(config, writers, schema, checkpointOptions);
+
+checkpoint
+  .reset()
+  .then(() => {
+    // start the indexer
+    checkpoint.start();
+  });
+
+const app = express();
+app.use(express.json({ limit: '4mb' }));
+app.use(express.urlencoded({ limit: '4mb', extended: false }));
+app.use(cors({ maxAge: 86400 }));
+
+// mount Checkpoint's GraphQL API on path /
+app.use('/', checkpoint.graphql);
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Listening at http://localhost:${PORT}`));
