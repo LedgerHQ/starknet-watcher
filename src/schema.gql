@@ -1,11 +1,22 @@
-scalar Text
-
-type Post {
+type Account {
   id: String!
-  author: String!
-  content: Text!
-  tag: String
-  tx_hash: String!
-  created_at: Int!
-  created_at_block: Int!
+  signers: Signer
+}
+
+type Signer {
+  id: String!
+}
+
+type ChallengePeriod {
+  id: String!
+  account: Account!
+  issuer: String!
+  reason: String!
+  deadline: String!
+  isClosed: String!
+}
+
+type Health {
+  id: String!
+  synced_block: String!
 }

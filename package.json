@@ -1,7 +1,7 @@
 {
-  "name": "notification-center",
+  "name": "starknet-watcher",
   "version": "0.0.1",
-  "description": "Open source notification web service",
+  "description": "Open source starknet indexing service",
   "main": "index.js",
   "scripts": {
     "build": "npx tsc",
