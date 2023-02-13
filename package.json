@@ -4,7 +4,7 @@
   "description": "Open source starknet indexing service",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc",
+    "build": "tsc",
     "start": "ts-node src/index.ts",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --check .",
