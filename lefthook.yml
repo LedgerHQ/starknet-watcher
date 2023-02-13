@@ -8,4 +8,4 @@ pre-push:
     build:
       run: pnpm build
     test:
-      run: pnpm test
+      run: pnpm test:ci
