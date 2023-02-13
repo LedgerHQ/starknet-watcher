@@ -3,7 +3,10 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import fs from 'fs';
-import Checkpoint, { LogLevel } from '@snapshot-labs/checkpoint';
+import Checkpoint, {
+  LogLevel,
+  CheckpointConfig,
+} from '@snapshot-labs/checkpoint';
 import config from './config.json';
 import * as writers from './writers';
 import ExampleABI from './abis/exampleABI.json';
@@ -21,15 +24,18 @@ const checkpointOptions = {
 };
 
 // Initialize checkpoint
-// @ts-ignore
-const checkpoint = new Checkpoint(config, writers, schema, checkpointOptions);
+// TODO: Remove manual type casting here
+const checkpoint = new Checkpoint(
+  config as unknown as CheckpointConfig,
+  writers,
+  schema,
+  checkpointOptions
+);
 
-checkpoint
-  .reset()
-  .then(() => {
-    // start the indexer
-    checkpoint.start();
-  });
+checkpoint.reset().then(() => {
+  // start the indexer
+  checkpoint.start();
+});
 
 const app = express();
 app.use(express.json({ limit: '4mb' }));
