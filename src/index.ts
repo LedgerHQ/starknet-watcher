@@ -6,7 +6,7 @@ import fs from 'fs';
 import Checkpoint, { LogLevel } from '@snapshot-labs/checkpoint';
 import config from './config.json';
 import * as writers from './writers';
-import BridgeAbi from './abis/bridge.json';
+import ExampleABI from './abis/exampleABI.json';
 
 const dir = __dirname.endsWith('dist/src') ? '../' : '';
 const schemaFile = path.join(__dirname, `${dir}../src/schema.gql`);
@@ -16,7 +16,7 @@ const checkpointOptions = {
   logLevel: LogLevel.Info,
   // prettifyLogs: process.env.NODE_ENV !== 'production',
   abis: {
-    Bridge: BridgeAbi,
+    Bridge: ExampleABI,
   },
 };
 

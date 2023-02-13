@@ -7,3 +7,7 @@ dist
 # configuration files
 *.yaml
 .*
+
+# dependencies
+package.json
+pnpm-lock.yaml
