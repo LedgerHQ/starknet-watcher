@@ -1,14 +1,22 @@
 name: Quality checks ✅
 
-on: [push]
+on:  
+  push:
+    branches:
+      - main
+      - prod
+  pull_request:
+    branches:
+      - main
 
 jobs:
   eslint:
+    # skip the job if the PR is a draft
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [16, 18]
-
     steps:
       - uses: actions/checkout@v2
       - uses: pnpm/action-setup@v2
@@ -22,16 +30,15 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
-
       - name: Run eslint
         run: pnpm run lint
 
   prettier:
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [16, 18]
-
     steps:
       - uses: actions/checkout@v2
       - uses: pnpm/action-setup@v2
@@ -45,16 +52,15 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
-
       - name: Run prettier
         run: pnpm run prettier
 
   build:
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [16, 18]
-
     steps:
       - uses: actions/checkout@v2
       - uses: pnpm/action-setup@v2
@@ -68,16 +74,15 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
-
       - name: Run build
         run: pnpm run build
 
   test:
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [16, 18]
-
     steps:
       - uses: actions/checkout@v2
       - uses: pnpm/action-setup@v2
@@ -91,6 +96,5 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
-
       - name: Run unit tests
         run: pnpm run test:ci
