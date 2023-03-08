@@ -1,16 +1,17 @@
 type Account {
   id: String!
-  signers: Signer
+  signers: [Signer!]
 }
 
 type Signer {
   id: String!
+  accounts: [Account!]
 }
 
 type ChallengePeriod {
   id: String!
   account: Account!
-  issuer: String!
+  issuer: Signer!
   reason: String!
   deadline: String!
   isClosed: String!
