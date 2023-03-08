@@ -1,0 +1,46 @@
+[
+  {
+    "data": [
+      {
+        "name": "signer",
+        "type": "felt"
+      }
+    ],
+    "keys": [],
+    "name": "signer_add",
+    "type": "event"
+  },
+  {
+    "data": [
+      {
+        "name": "signer",
+        "type": "felt"
+      }
+    ],
+    "keys": [],
+    "name": "signer_remove",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "name": "signer",
+        "type": "felt"
+      }
+    ],
+    "name": "add_signer",
+    "outputs": [],
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "signer",
+        "type": "felt"
+      }
+    ],
+    "name": "remove_signer",
+    "outputs": [],
+    "type": "function"
+  }
+]
