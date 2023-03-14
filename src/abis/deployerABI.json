@@ -1,0 +1,32 @@
+[
+  {
+    "data": [
+      {
+        "name": "wallet_address",
+        "type": "felt"
+      },
+      {
+        "name": "signer",
+        "type": "felt"
+      }
+    ],
+    "keys": [],
+    "name": "wallet_deployed",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      {
+        "name": "wallet_address",
+        "type": "felt"
+      },
+      {
+        "name": "signer",
+        "type": "felt"
+      }
+    ],
+    "name": "deploy_wallet",
+    "outputs": [],
+    "type": "function"
+  }
+]

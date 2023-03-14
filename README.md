@@ -17,7 +17,7 @@ pnpm install
 Install the pre-push hook
 
 ```sh
-npx lefhook install
+npx lefthook install
 ```
 
 ## Testing
@@ -26,14 +26,16 @@ Start a database locally
 
 ## Getting Started
 
-First, run the database:
+First, mount the database image using docker-compose:
 
 ```sh
-docker run \
-    -it -p 3306:3306 \
-    -e MYSQL_ROOT_PASSWORD="default_password" \
-    -e MYSQL_DATABASE="checkpoint" mysql:8.0 \
-    "--default-authentication-plugin=mysql_native_password"
+docker-compose up -d
+```
+
+Update your .env file by adding the database url
+
+```sh
+DATABASE_URL=mysql://root:default_password@localhost:3306/checkpoint
 ```
 
 Then start the indexing script with the following command:

@@ -1,3 +1,4 @@
+# TODO: account<->signer must be a many-to-many relationship
 type Account {
   id: String!
   signers: Signer
@@ -10,7 +11,7 @@ type Signer {
 type ChallengePeriod {
   id: String!
   account: Account!
-  issuer: String!
+  issuer: Signer!
   reason: String!
   deadline: String!
   isClosed: String!
